@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<annotation>
+	<folder>Images</folder>
+	<filename>marine-debris-aris3k-994.png</filename>
+	<path>Images/marine-debris-aris3k-994.png</path>
+	<source>
+		<database>Forward-Looking Sonar Marine Debris Datasets</database>
+		<annotation>COCO Format - x y w h</annotation>
+		<images>Watertank Dataset</images>
+	</source>
+	<size>
+		<width>320</width>
+		<height>480</height>
+		<depth>1</depth>
+	</size>
+	<segmented>1</segmented>
+	<object>
+		<name>Hook</name>
+		<bndbox>
+			<x>96</x>
+			<y>209</y>
+			<w>71</w>
+			<h>40</h>
+		</bndbox>
+	</object>
+	<object>
+		<name>Tire</name>
+		<bndbox>
+			<x>160</x>
+			<y>106</y>
+			<w>73</w>
+			<h>75</h>
+		</bndbox>
+	</object>
+	<object>
+		<name>Propeller</name>
+		<bndbox>
+			<x>264</x>
+			<y>237</y>
+			<w>54</w>
+			<h>28</h>
+		</bndbox>
+	</object>
+	<object>
+		<name>Chain</name>
+		<bndbox>
+			<x>283</x>
+			<y>61</y>
+			<w>36</w>
+			<h>29</h>
+		</bndbox>
+	</object>
+</annotation>
