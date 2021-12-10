@@ -113,7 +113,7 @@ class Marine:
 
                     box_data.append([xmin, ymin, xmax, ymax, class_arg])
 
-            data.append({'image_path': images[idx], 'boxes': box_data,
+            data.append({'image': images[idx], 'boxes': np.asarray(box_data),
                          'image_index': images[idx]})
 
         return data
