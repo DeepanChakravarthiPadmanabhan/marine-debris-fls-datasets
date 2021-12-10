@@ -1,9 +1,7 @@
 import numpy as np
 import cv2
 
-import argparse
 import matplotlib.pyplot as plt
-import matplotlib.patches as patches
 from skimage.measure import regionprops, label
 
 input_filename = '/media/deepan/externaldrive1/project_repos/marine_od/marine-debris-fls-datasets/md_fls_dataset/data/watertank-segmentation/Masks/marine-debris-aris3k-264.png'

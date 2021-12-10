@@ -93,6 +93,8 @@ class Marine:
             size_tree = root.find('size')
             width = float(size_tree.find('width').text)
             height = float(size_tree.find('height').text)
+            if split_name == 'test':
+                width, height = 1, 1
             box_data = []
             for object_tree in root.findall('object'):
                 class_name = object_tree.find('name').text
