@@ -17,10 +17,10 @@
 	<object>
 		<name>Drink-carton</name>
 		<bndbox>
-			<x>197</x>
-			<y>152</y>
-			<w>52</w>
-			<h>25</h>
+			<x>152</x>
+			<y>197</y>
+			<w>25</w>
+			<h>52</h>
 		</bndbox>
 	</object>
 </annotation>

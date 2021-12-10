@@ -17,28 +17,28 @@
 	<object>
 		<name>Hook</name>
 		<bndbox>
-			<x>38</x>
-			<y>127</y>
-			<w>67</w>
-			<h>43</h>
+			<x>127</x>
+			<y>38</y>
+			<w>43</w>
+			<h>67</h>
 		</bndbox>
 	</object>
 	<object>
 		<name>Tire</name>
 		<bndbox>
-			<x>114</x>
-			<y>40</y>
-			<w>76</w>
-			<h>75</h>
+			<x>40</x>
+			<y>114</y>
+			<w>75</w>
+			<h>76</h>
 		</bndbox>
 	</object>
 	<object>
 		<name>Propeller</name>
 		<bndbox>
-			<x>200</x>
-			<y>187</y>
-			<w>87</w>
-			<h>76</h>
+			<x>187</x>
+			<y>200</y>
+			<w>76</w>
+			<h>87</h>
 		</bndbox>
 	</object>
 </annotation>

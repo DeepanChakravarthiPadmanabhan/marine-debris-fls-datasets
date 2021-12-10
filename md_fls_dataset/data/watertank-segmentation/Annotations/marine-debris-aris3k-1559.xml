@@ -17,37 +17,37 @@
 	<object>
 		<name>Valve</name>
 		<bndbox>
-			<x>28</x>
-			<y>11</y>
-			<w>83</w>
-			<h>152</h>
+			<x>11</x>
+			<y>28</y>
+			<w>152</w>
+			<h>83</h>
 		</bndbox>
 	</object>
 	<object>
 		<name>Can</name>
 		<bndbox>
-			<x>136</x>
-			<y>213</y>
-			<w>47</w>
-			<h>42</h>
+			<x>213</x>
+			<y>136</y>
+			<w>42</w>
+			<h>47</h>
 		</bndbox>
 	</object>
 	<object>
 		<name>Hook</name>
 		<bndbox>
-			<x>212</x>
-			<y>54</y>
-			<w>43</w>
-			<h>76</h>
+			<x>54</x>
+			<y>212</y>
+			<w>76</w>
+			<h>43</h>
 		</bndbox>
 	</object>
 	<object>
 		<name>Tire</name>
 		<bndbox>
-			<x>286</x>
-			<y>125</y>
-			<w>83</w>
-			<h>82</h>
+			<x>125</x>
+			<y>286</y>
+			<w>82</w>
+			<h>83</h>
 		</bndbox>
 	</object>
 </annotation>

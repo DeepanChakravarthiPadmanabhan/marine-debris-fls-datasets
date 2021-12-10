@@ -17,8 +17,8 @@
 	<object>
 		<name>Can</name>
 		<bndbox>
-			<x>310</x>
-			<y>176</y>
+			<x>176</x>
+			<y>310</y>
 			<w>33</w>
 			<h>33</h>
 		</bndbox>

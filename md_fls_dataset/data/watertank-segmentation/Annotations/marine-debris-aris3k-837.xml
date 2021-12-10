@@ -17,10 +17,10 @@
 	<object>
 		<name>Propeller</name>
 		<bndbox>
-			<x>232</x>
-			<y>86</y>
-			<w>105</w>
-			<h>98</h>
+			<x>86</x>
+			<y>232</y>
+			<w>98</w>
+			<h>105</h>
 		</bndbox>
 	</object>
 </annotation>

@@ -17,19 +17,19 @@
 	<object>
 		<name>Shampoo-bottle</name>
 		<bndbox>
-			<x>118</x>
-			<y>208</y>
-			<w>181</w>
-			<h>63</h>
+			<x>208</x>
+			<y>118</y>
+			<w>63</w>
+			<h>181</h>
 		</bndbox>
 	</object>
 	<object>
 		<name>Drink-carton</name>
 		<bndbox>
-			<x>321</x>
-			<y>208</y>
-			<w>30</w>
-			<h>31</h>
+			<x>208</x>
+			<y>321</y>
+			<w>31</w>
+			<h>30</h>
 		</bndbox>
 	</object>
 </annotation>

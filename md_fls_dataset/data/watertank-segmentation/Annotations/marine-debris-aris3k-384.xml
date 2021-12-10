@@ -17,10 +17,10 @@
 	<object>
 		<name>Hook</name>
 		<bndbox>
-			<x>142</x>
-			<y>62</y>
-			<w>45</w>
-			<h>79</h>
+			<x>62</x>
+			<y>142</y>
+			<w>79</w>
+			<h>45</h>
 		</bndbox>
 	</object>
 </annotation>

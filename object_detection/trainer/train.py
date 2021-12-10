@@ -3,10 +3,10 @@ import argparse
 
 import cv2
 import tensorflow as tf
-# gpus = tf.config.experimental.list_physical_devices('GPU')
-# tf.config.experimental.set_memory_growth(gpus[0], True)
+gpus = tf.config.experimental.list_physical_devices('GPU')
+tf.config.experimental.set_memory_growth(gpus[0], True)
 
-from tensorflow.keras.optimizers import SGD
+from tensorflow.keras.optimizers import SGD, Adam
 from tensorflow.keras.callbacks import CSVLogger, ModelCheckpoint
 from paz.optimization.callbacks import LearningRateScheduler
 from paz.models import SSD300
@@ -25,7 +25,7 @@ description = 'Training script for single-shot object detection models'
 parser = argparse.ArgumentParser(description=description)
 parser.add_argument('-bs', '--batch_size', default=1, type=int,
                     help='Batch size for training')
-parser.add_argument('-et', '--evaluation_period', default=10, type=int,
+parser.add_argument('-et', '--evaluation_period', default=3, type=int,
                     help='evaluation frequency')
 parser.add_argument('-lr', '--learning_rate', default=0.001, type=float,
                     help='Initial learning rate for SGD')
@@ -49,7 +49,7 @@ parser.add_argument('-w', '--workers', default=1, type=int,
                     help='Number of workers used for optimization')
 args = parser.parse_args()
 
-optimizer = SGD(args.learning_rate, args.momentum)
+optimizer = Adam(args.learning_rate, args.momentum)
 
 ds_path = '/media/deepan/externaldrive1/project_repos/marine_od/'
 ds_path += 'marine-debris-fls-datasets/md_fls_dataset/'
@@ -94,6 +94,7 @@ for data, augmentator in zip(datasets, augmentators):
     sequencers.append(sequencer)
 
 # batch = sequencers[0].__getitem__(0)
+# print(batch[0]['image'].shape)
 
 # setting callbacks
 model_path = os.path.join(args.save_path, model.name)

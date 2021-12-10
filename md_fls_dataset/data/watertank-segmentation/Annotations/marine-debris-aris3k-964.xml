@@ -19,8 +19,8 @@
 		<bndbox>
 			<x>146</x>
 			<y>146</y>
-			<w>38</w>
-			<h>69</h>
+			<w>69</w>
+			<h>38</h>
 		</bndbox>
 	</object>
 </annotation>

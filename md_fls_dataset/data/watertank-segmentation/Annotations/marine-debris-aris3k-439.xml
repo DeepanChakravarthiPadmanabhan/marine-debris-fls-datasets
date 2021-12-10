@@ -17,10 +17,10 @@
 	<object>
 		<name>Can</name>
 		<bndbox>
-			<x>318</x>
-			<y>173</y>
-			<w>26</w>
-			<h>37</h>
+			<x>173</x>
+			<y>318</y>
+			<w>37</w>
+			<h>26</h>
 		</bndbox>
 	</object>
 </annotation>

@@ -17,28 +17,28 @@
 	<object>
 		<name>Wall</name>
 		<bndbox>
-			<x>26</x>
-			<y>10</y>
-			<w>34</w>
-			<h>149</h>
+			<x>10</x>
+			<y>26</y>
+			<w>149</w>
+			<h>34</h>
 		</bndbox>
 	</object>
 	<object>
 		<name>Propeller</name>
 		<bndbox>
-			<x>169</x>
-			<y>46</y>
-			<w>62</w>
-			<h>56</h>
+			<x>46</x>
+			<y>169</y>
+			<w>56</w>
+			<h>62</h>
 		</bndbox>
 	</object>
 	<object>
 		<name>Can</name>
 		<bndbox>
-			<x>292</x>
-			<y>92</y>
-			<w>65</w>
-			<h>40</h>
+			<x>92</x>
+			<y>292</y>
+			<w>40</w>
+			<h>65</h>
 		</bndbox>
 	</object>
 </annotation>

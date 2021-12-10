@@ -17,19 +17,19 @@
 	<object>
 		<name>Wall</name>
 		<bndbox>
-			<x>28</x>
-			<y>10</y>
-			<w>66</w>
-			<h>147</h>
+			<x>10</x>
+			<y>28</y>
+			<w>147</w>
+			<h>66</h>
 		</bndbox>
 	</object>
 	<object>
 		<name>Can</name>
 		<bndbox>
-			<x>97</x>
-			<y>149</y>
-			<w>37</w>
-			<h>38</h>
+			<x>149</x>
+			<y>97</y>
+			<w>38</w>
+			<h>37</h>
 		</bndbox>
 	</object>
 </annotation>

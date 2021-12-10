@@ -17,8 +17,8 @@
 	<object>
 		<name>Wall</name>
 		<bndbox>
-			<x>34</x>
-			<y>266</y>
+			<x>266</x>
+			<y>34</y>
 			<w>43</w>
 			<h>43</h>
 		</bndbox>
@@ -26,10 +26,10 @@
 	<object>
 		<name>Can</name>
 		<bndbox>
-			<x>302</x>
-			<y>156</y>
-			<w>30</w>
-			<h>40</h>
+			<x>156</x>
+			<y>302</y>
+			<w>40</w>
+			<h>30</h>
 		</bndbox>
 	</object>
 </annotation>

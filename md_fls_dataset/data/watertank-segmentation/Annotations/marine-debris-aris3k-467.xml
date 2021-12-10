@@ -17,28 +17,28 @@
 	<object>
 		<name>Wall</name>
 		<bndbox>
-			<x>34</x>
-			<y>17</y>
-			<w>97</w>
-			<h>47</h>
+			<x>17</x>
+			<y>34</y>
+			<w>47</w>
+			<h>97</h>
 		</bndbox>
 	</object>
 	<object>
 		<name>Drink-carton</name>
 		<bndbox>
-			<x>200</x>
-			<y>144</y>
-			<w>29</w>
-			<h>23</h>
+			<x>144</x>
+			<y>200</y>
+			<w>23</w>
+			<h>29</h>
 		</bndbox>
 	</object>
 	<object>
 		<name>Tire</name>
 		<bndbox>
-			<x>298</x>
-			<y>180</y>
-			<w>57</w>
-			<h>55</h>
+			<x>180</x>
+			<y>298</y>
+			<w>55</w>
+			<h>57</h>
 		</bndbox>
 	</object>
 </annotation>

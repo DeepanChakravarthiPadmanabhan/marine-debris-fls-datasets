@@ -17,19 +17,19 @@
 	<object>
 		<name>Tire</name>
 		<bndbox>
-			<x>153</x>
-			<y>180</y>
-			<w>69</w>
-			<h>71</h>
+			<x>180</x>
+			<y>153</y>
+			<w>71</w>
+			<h>69</h>
 		</bndbox>
 	</object>
 	<object>
 		<name>Chain</name>
 		<bndbox>
-			<x>233</x>
-			<y>56</y>
-			<w>40</w>
-			<h>65</h>
+			<x>56</x>
+			<y>233</y>
+			<w>65</w>
+			<h>40</h>
 		</bndbox>
 	</object>
 </annotation>

@@ -17,10 +17,10 @@
 	<object>
 		<name>Chain</name>
 		<bndbox>
-			<x>256</x>
-			<y>55</y>
-			<w>167</w>
-			<h>205</h>
+			<x>55</x>
+			<y>256</y>
+			<w>205</w>
+			<h>167</h>
 		</bndbox>
 	</object>
 </annotation>

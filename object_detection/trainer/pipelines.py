@@ -67,13 +67,8 @@ class PreprocessImage(SequentialProcessor):
     def __init__(self, shape, mean=None):
         super(PreprocessImage, self).__init__()
         self.add(pr.ResizeImage(shape))
-        # self.add(StackImages())
         self.add(pr.CastImage(float))
-        if mean is None:
-            self.add(pr.NormalizeImage())
-        else:
-            self.add(pr.SubtractMeanImage(mean))
-
+        self.add(pr.NormalizeImage())
 
 class AugmentDetection(SequentialProcessor):
     """Augment boxes and images for object detection.
