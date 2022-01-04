@@ -16,10 +16,8 @@ def SSD_ResNet20(num_classes=21, input_shape=(96, 96, 1),
     resnet20.trainable = True
     resnet_out = resnet20(image)
 
-    # conv4_3_norm = resnet20.get_layer('conv2d_98').output
-    # fc7 = resnet20.get_layer('conv2d_105').output
-    conv4_3_norm = resnet20.get_layer('activation_89').output
-    fc7 = resnet20.get_layer('activation_95').output
+    conv4_3_norm = resnet20.get_layer('conv2d_98').output
+    fc7 = resnet20.get_layer('conv2d_105').output
 
     # EXTRA layers in SSD -----------------------------------------------------
     # Block 6 -----------------------------------------------------------------

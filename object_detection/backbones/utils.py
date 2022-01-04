@@ -125,9 +125,9 @@ def get_prior_box_configuration(configuration_name='VOC'):
         configuration = {
             'feature_map_sizes': [48, 24, 12, 6, 4, 2],
             'image_size': 96,
-            'steps': [8, 16, 32, 64, 100, 300],
-            'min_sizes': [30, 60, 111, 162, 213, 264],
-            'max_sizes': [60, 111, 162, 213, 264, 315],
+            'steps': [4, 8, 16, 32, 64, 96],
+            'min_sizes': [12, 21, 44, 70, 81, 90],
+            'max_sizes': [21, 44, 70, 81, 90, 103],
             'aspect_ratios': [[2], [2, 3], [2, 3], [2, 3], [2], [2]],
             'variance': [0.1, 0.2]}
 
@@ -135,9 +135,9 @@ def get_prior_box_configuration(configuration_name='VOC'):
         configuration = {
             'feature_map_sizes': [48, 24, 12, 6, 4, 2],
             'image_size': 96,
-            'steps': [8, 16, 32, 64, 100, 300],
-            'min_sizes': [30, 60, 111, 162, 213, 264],
-            'max_sizes': [60, 111, 162, 213, 264, 315],
+            'steps': [4, 8, 16, 32, 64, 96],
+            'min_sizes': [12, 21, 44, 70, 81, 90],
+            'max_sizes': [21, 44, 70, 81, 90, 103],
             'aspect_ratios': [[2], [2, 3], [2, 3], [2, 3], [2], [2]],
             'variance': [0.1, 0.2]}
     else:
