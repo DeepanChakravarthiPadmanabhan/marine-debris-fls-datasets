@@ -56,6 +56,10 @@ train_data = Dataset.load_data('train')
 val_data = Dataset.load_data('val')
 test_data = Dataset.load_data('test')
 
+# train_data = train_data[:5]
+# val_data = val_data[:5]
+# test_data = test_data[:5]
+
 print('Length of train, val, test: ', len(train_data), len(val_data), len(test_data))
 
 datasets = []

@@ -15,9 +15,9 @@ def SSD_MobileNet(num_classes=12, input_shape=(96, 96, 1),
     mobilenet = load_model(weight_folder + 'fls-turntable-objects-pretrained-mobilenet-platform-96x96.hdf5')
     mobilenet.trainable = True
     mobilenet_out = mobilenet(image)
-    print(mobilenet.summary())
-    conv4_3_norm = mobilenet.get_layer('conv_pw_1_relu').output
-    fc7 = mobilenet.get_layer('conv_pw_3_relu').output
+
+    conv4_3_norm = mobilenet.get_layer('conv_pw_1').output
+    fc7 = mobilenet.get_layer('conv_pw_3').output
 
     # EXTRA layers in SSD -----------------------------------------------------
     # Block 6 -----------------------------------------------------------------
