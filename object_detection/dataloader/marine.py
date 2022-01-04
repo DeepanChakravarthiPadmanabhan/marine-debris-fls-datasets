@@ -86,6 +86,7 @@ class Marine:
             raise ValueError('Give proper split name.')
 
     def load_data(self, split_name, randomize_inputs=True):
+        print('Randomizing data: ', randomize_inputs)
         images, annotations = self.get_split_data(split_name)
         data = []
         for idx in range(len(images)):
@@ -173,6 +174,12 @@ def add_random_noise(xmin, ymin, xmax, ymax, image_height, image_width):
         ymin_new = ymin
     if ymax_new > image_height or ymax_new < 0:
         ymax_new = ymax
+    if ymin_new >= ymax_new:
+        ymin_new = ymin
+        ymax_new = ymax
+    if xmin_new >= xmax_new:
+        xmin_new = xmin
+        xmax_new = xmax
     return xmin_new, ymin_new, xmax_new, ymax_new
 
 

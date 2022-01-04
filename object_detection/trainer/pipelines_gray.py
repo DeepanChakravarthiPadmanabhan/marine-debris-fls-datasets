@@ -1,4 +1,5 @@
 import os
+import cv2
 import numpy as np
 from paz import processors as pr
 from paz.abstract import SequentialProcessor, Processor
@@ -21,6 +22,47 @@ class StackImages(Processor):
     def call(self, image):
         image = np.stack((image,) * 3, axis=-1)
         return image
+
+
+class LoadImageGray(Processor):
+    """Loads image.
+
+    # Arguments
+        num_channels: Integer, valid integers are: 1, 3 and 4.
+    """
+    def __init__(self):
+        super(LoadImageGray, self).__init__()
+
+    def call(self, image):
+        return load_image_gray(image)
+
+
+def load_image_gray(filepath):
+    """Load image from a ''filepath''.
+
+    # Arguments
+        filepath: String indicating full path to the image.
+        num_channels: Int.
+
+    # Returns
+        Numpy array.
+    """
+    image = cv2.imread(filepath, cv2.IMREAD_GRAYSCALE)
+    image = np.expand_dims(image, -1)
+    return image
+
+
+class ExpandDims(Processor):
+    """Loads image.
+
+    # Arguments
+        num_channels: Integer, valid integers are: 1, 3 and 4.
+    """
+    def __init__(self):
+        super(ExpandDims, self).__init__()
+
+    def call(self, image):
+        return np.expand_dims(image, -1)
 
 
 class AugmentBoxes(SequentialProcessor):
@@ -68,6 +110,7 @@ class PreprocessImage(SequentialProcessor):
         self.add(pr.ResizeImage(shape))
         self.add(pr.CastImage(float))
         self.add(pr.NormalizeImage())
+        self.add(ExpandDims())
 
 
 class AugmentDetection(SequentialProcessor):
@@ -89,24 +132,24 @@ class AugmentDetection(SequentialProcessor):
                  mean=None, IOU=.5, variances=[0.1, 0.1, 0.2, 0.2]):
         super(AugmentDetection, self).__init__()
         # image processors
-        self.augment_image = AugmentImage()
+        # self.augment_image = AugmentImage()
         self.preprocess_image = PreprocessImage((size, size), mean)
 
         # box processors
-        self.augment_boxes = AugmentBoxes()
+        # self.augment_boxes = AugmentBoxes()
         args = (num_classes, prior_boxes, IOU, variances)
         self.preprocess_boxes = PreprocessBoxes(*args)
 
         # pipeline
         self.add(pr.UnpackDictionary(['image', 'boxes']))
-        self.add(pr.ControlMap(pr.LoadImage(), [0], [0]))
-        if split == pr.TRAIN:
-            self.add(pr.ControlMap(self.augment_image, [0], [0]))
-            self.add(pr.ControlMap(self.augment_boxes, [0, 1], [0, 1]))
+        self.add(pr.ControlMap(LoadImageGray(), [0], [0]))
+        # if split == pr.TRAIN:
+            # self.add(pr.ControlMap(self.augment_image, [0], [0]))
+            # self.add(pr.ControlMap(self.augment_boxes, [0, 1], [0, 1]))
         self.add(pr.ControlMap(self.preprocess_image, [0], [0]))
         self.add(pr.ControlMap(self.preprocess_boxes, [1], [1]))
         self.add(pr.SequenceWrapper(
-            {0: {'image': [size, size, 3]}},
+            {0: {'image': [size, size, 1]}},
             {1: {'boxes': [len(prior_boxes), 4 + num_classes]}}))
 
 
@@ -135,7 +178,8 @@ class DetectSingleShotGray(Processor):
             [pr.ResizeImage(self.model.input_shape[1:3]),
              pr.NormalizeImage(),
              pr.CastImage(float),
-             pr.ExpandDims(axis=0)])
+             pr.ExpandDims(axis=0),
+             pr.ExpandDims(axis=-1)])
         postprocessing = SequentialProcessor(
             [pr.Squeeze(axis=None),
              pr.DecodeBoxes(self.model.prior_boxes, self.variances),
@@ -148,8 +192,10 @@ class DetectSingleShotGray(Processor):
         self.wrap = pr.WrapOutput(['image', 'boxes2D'])
 
     def call(self, image):
+        image = image[:, :, 0]
         boxes2D = self.predict(image)
         boxes2D = self.denormalize(image, boxes2D)
+        image = np.stack((image,) * 3, axis=-1)
         if self.draw:
             image = self.draw_boxes2D(image, boxes2D)
         return self.wrap(image, boxes2D)

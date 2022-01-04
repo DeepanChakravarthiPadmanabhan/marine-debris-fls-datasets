@@ -1,12 +1,12 @@
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
-from paz.models import SSD300
+from object_detection.backbones.ssd300 import SSD300
 from object_detection.dataloader.marine import label_map
 from object_detection.trainer.pipelines import DetectSingleShotGray
 
 input_file = '/media/deepan/externaldrive1/project_repos/marine_od/marine-debris-fls-datasets/md_fls_dataset/data/watertank-segmentation/Images/'
-input_file += 'marine-debris-aris3k-536.png'
+input_file += 'marine-debris-aris3k-336.png'
 
 image = cv2.imread(input_file, cv2.IMREAD_GRAYSCALE)
 image = np.stack((image,)*3, axis=-1)

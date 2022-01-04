@@ -9,15 +9,15 @@ import tensorflow as tf
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.callbacks import CSVLogger, ModelCheckpoint
 from paz.optimization.callbacks import LearningRateScheduler
-from object_detection.backbones.ssd300 import SSD300
+from object_detection.backbones.resnet20 import SSD300_ResNet20
 from paz.optimization import MultiBoxLoss
 from paz.abstract import ProcessingSequence
 from paz.processors import TRAIN, VAL
 from object_detection.dataloader.marine import Marine
 from object_detection.dataloader.marine import label_map
-from object_detection.trainer.pipelines import DetectSingleShotGray
-from object_detection.trainer.pipelines import AugmentDetection
-from object_detection.trainer.pipelines import EvaluateMAPGray
+from object_detection.trainer.pipelines_gray import DetectSingleShotGray
+from object_detection.trainer.pipelines_gray import AugmentDetection
+from object_detection.trainer.pipelines_gray import EvaluateMAPGray
 
 
 description = 'Training script for single-shot object detection models'
@@ -71,7 +71,7 @@ class_names = Dataset.class_names
 num_classes = Dataset.num_classes
 input_image_shape = (480, 320)
 
-model = SSD300(num_classes, base_weights=None, head_weights=None)
+model = SSD300_ResNet20(num_classes)
 model.summary()
 
 # Instantiating loss and metrics
@@ -84,7 +84,7 @@ model.compile(optimizer, loss.compute_loss, metrics)
 # setting data augmentation pipeline
 augmentators = []
 for split in [TRAIN, VAL]:
-    augmentator = AugmentDetection(model.prior_boxes, split,
+    augmentator = AugmentDetection(model.prior_boxes, split, size=96,
                                    num_classes=num_classes)
     augmentators.append(augmentator)
 
@@ -94,8 +94,8 @@ for data, augmentator in zip(datasets, augmentators):
     sequencer = ProcessingSequence(augmentator, args.batch_size, data)
     sequencers.append(sequencer)
 
-# batch = sequencers[0].__getitem__(0)
-# print(batch[0]['image'].shape)
+batch = sequencers[0].__getitem__(0)
+print(batch[0]['image'].shape)
 
 # setting callbacks
 model_path = os.path.join(args.save_path, model.name)
