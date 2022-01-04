@@ -8,15 +8,18 @@ from object_detection.backbones.utils import create_prior_boxes
 from tensorflow.keras.models import load_model
 
 
-def SSD300_ResNet20(num_classes=21, input_shape=(96, 96, 1),
-                    num_priors=[4, 6, 6, 6, 4, 4], l2_loss=0.0005,
-                    return_base=False):
+def SSD_ResNet20(num_classes=21, input_shape=(96, 96, 1),
+                 num_priors=[4, 6, 6, 6, 4, 4], l2_loss=0.0005,
+                 return_base=False):
     image = Input(shape=input_shape, name='image')
-    resnet20 = load_model('object_detection/backbones/fls-turntable-objects-pretrained-resnet20-platform-96x96.hdf5')
+    resnet20 = load_model('backbone_weights/fls-turntable-objects-pretrained-resnet20-platform-96x96.hdf5')
+    resnet20.trainable = True
     resnet_out = resnet20(image)
 
-    conv4_3_norm = resnet20.get_layer('conv2d_98').output
-    fc7 = resnet20.get_layer('conv2d_105').output
+    # conv4_3_norm = resnet20.get_layer('conv2d_98').output
+    # fc7 = resnet20.get_layer('conv2d_105').output
+    conv4_3_norm = resnet20.get_layer('activation_89').output
+    fc7 = resnet20.get_layer('activation_95').output
 
     # EXTRA layers in SSD -----------------------------------------------------
     # Block 6 -----------------------------------------------------------------

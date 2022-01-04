@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
-from object_detection.backbones.ssd300 import SSD300
+from object_detection.backbones.ssd_vgg16 import SSD300
 from object_detection.dataloader.marine import label_map
 from object_detection.trainer.pipelines import DetectSingleShotGray
 

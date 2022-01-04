@@ -9,15 +9,15 @@ import tensorflow as tf
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.callbacks import CSVLogger, ModelCheckpoint
 from paz.optimization.callbacks import LearningRateScheduler
-from object_detection.backbones.resnet20 import SSD300_ResNet20
+from object_detection.backbones.ssd_vgg16 import SSD300
 from paz.optimization import MultiBoxLoss
 from paz.abstract import ProcessingSequence
 from paz.processors import TRAIN, VAL
 from object_detection.dataloader.marine import Marine
 from object_detection.dataloader.marine import label_map
-from object_detection.trainer.pipelines_gray import DetectSingleShotGray
-from object_detection.trainer.pipelines_gray import AugmentDetection
-from object_detection.trainer.pipelines_gray import EvaluateMAPGray
+from object_detection.trainer.pipelines import DetectSingleShotGray
+from object_detection.trainer.pipelines import AugmentDetection
+from object_detection.trainer.pipelines import EvaluateMAPGray
 
 
 description = 'Training script for single-shot object detection models'
@@ -38,7 +38,7 @@ parser.add_argument('-iou', '--AP_IOU', default=0.5, type=float,
                     help='Average precision IOU used for evaluation')
 parser.add_argument('-sp', '--save_path', default='trained_models/',
                     type=str, help='Path for writing model weights and logs')
-parser.add_argument('-dp', '--data_path', default='VOCdevkit/',
+parser.add_argument('-dp', '--data_path', default='/media/deepan/externaldrive1/project_repos/marine_od/marine-debris-fls-datasets/md_fls_dataset/data/watertank-segmentation',
                     type=str, help='Path for writing model weights and logs')
 parser.add_argument('-se', '--scheduled_epochs', nargs='+', type=int,
                     default=[110, 152], help='Epoch learning rate reduction')
@@ -50,17 +50,11 @@ args = parser.parse_args()
 
 optimizer = Adam(args.learning_rate, args.momentum)
 
-ds_path = '/media/deepan/externaldrive1/project_repos/marine_od/'
-ds_path += 'marine-debris-fls-datasets/md_fls_dataset/'
-ds_path += 'data/watertank-segmentation'
+ds_path = args.data_path
 Dataset = Marine(ds_path, label_map, 'train')
 train_data = Dataset.load_data('train')
 val_data = Dataset.load_data('val')
 test_data = Dataset.load_data('test')
-
-train_data = train_data[:5]
-val_data = val_data[:5]
-test_data = test_data[:5]
 
 print('Length of train, val, test: ', len(train_data), len(val_data), len(test_data))
 
@@ -71,7 +65,7 @@ class_names = Dataset.class_names
 num_classes = Dataset.num_classes
 input_image_shape = (480, 320)
 
-model = SSD300_ResNet20(num_classes)
+model = SSD300(num_classes, base_weights=None, head_weights=None)
 model.summary()
 
 # Instantiating loss and metrics
@@ -84,7 +78,7 @@ model.compile(optimizer, loss.compute_loss, metrics)
 # setting data augmentation pipeline
 augmentators = []
 for split in [TRAIN, VAL]:
-    augmentator = AugmentDetection(model.prior_boxes, split, size=96,
+    augmentator = AugmentDetection(model.prior_boxes, split,
                                    num_classes=num_classes)
     augmentators.append(augmentator)
 
@@ -94,8 +88,8 @@ for data, augmentator in zip(datasets, augmentators):
     sequencer = ProcessingSequence(augmentator, args.batch_size, data)
     sequencers.append(sequencer)
 
-batch = sequencers[0].__getitem__(0)
-print(batch[0]['image'].shape)
+# batch = sequencers[0].__getitem__(0)
+# print(batch[0]['image'].shape)
 
 # setting callbacks
 model_path = os.path.join(args.save_path, model.name)

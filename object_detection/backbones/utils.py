@@ -124,7 +124,17 @@ def get_prior_box_configuration(configuration_name='VOC'):
     elif configuration_name in {'SSD-ResNet20'}:
         configuration = {
             'feature_map_sizes': [48, 24, 12, 6, 4, 2],
-            'image_size': 300,
+            'image_size': 96,
+            'steps': [8, 16, 32, 64, 100, 300],
+            'min_sizes': [30, 60, 111, 162, 213, 264],
+            'max_sizes': [60, 111, 162, 213, 264, 315],
+            'aspect_ratios': [[2], [2, 3], [2, 3], [2, 3], [2], [2]],
+            'variance': [0.1, 0.2]}
+
+    elif configuration_name in {'SSD-MobileNet'}:
+        configuration = {
+            'feature_map_sizes': [48, 24, 12, 6, 4, 2],
+            'image_size': 96,
             'steps': [8, 16, 32, 64, 100, 300],
             'min_sizes': [30, 60, 111, 162, 213, 264],
             'max_sizes': [60, 111, 162, 213, 264, 315],
