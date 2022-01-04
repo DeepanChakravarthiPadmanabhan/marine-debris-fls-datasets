@@ -85,7 +85,7 @@ class Marine:
         else:
             raise ValueError('Give proper split name.')
 
-    def load_data(self, split_name):
+    def load_data(self, split_name, randomize_inputs=True):
         images, annotations = self.get_split_data(split_name)
         data = []
         for idx in range(len(images)):
@@ -103,9 +103,8 @@ class Marine:
                 class_name = object_tree.find('name').text
                 if class_name in self.class_to_arg:
                     class_arg = self.class_to_arg[class_name]
-                    if split_name != 'test':
-                        class_arg = get_random_label(
-                            class_arg, self.class_to_arg)
+                    if split_name != 'test' and randomize_inputs:
+                        class_arg = get_random_label(self.class_to_arg)
                     bounding_box = object_tree.find('bndbox')
 
                     x = float(bounding_box.find('x').text)
@@ -116,10 +115,9 @@ class Marine:
                     ymin = y
                     xmax = xmin + w
                     ymax = ymin + h
-                    if split_name != 'test':
-                        xmin, ymin, xmax, ymax = get_random_box(
+                    if split_name != 'test' and randomize_inputs:
+                        xmin, ymin, xmax, ymax = add_random_noise(
                             xmin, ymin, xmax, ymax, image_height, image_width)
-
                     xmin, xmax = xmin / width, xmax / width
                     ymin, ymax = ymin / height, ymax / height
 
@@ -143,10 +141,8 @@ def check_box(image_path, boxes):
     plt.show()
 
 
-def get_random_label(class_name, class_to_arg):
-    class_out = class_name
-    while class_out == class_name:
-        class_out = random.randint(0, len(class_to_arg)-1)
+def get_random_label(class_to_arg):
+    class_out = random.randint(0, len(class_to_arg)-1)
     return class_out
 
 
@@ -162,6 +158,22 @@ def get_random_box(xmin, ymin, xmax, ymax, image_height, image_width):
         bb2 = {'x1': x1, 'x2': x2, 'y1': y1, 'y2': y2}
         iou = get_iou(bb1, bb2)
     return float(x1), float(y1), float(x2), float(y2)
+
+
+def add_random_noise(xmin, ymin, xmax, ymax, image_height, image_width):
+    xmin_new = xmin + np.random.normal(0, 10)
+    xmax_new = xmax + np.random.normal(0, 10)
+    ymin_new = ymin + np.random.normal(0, 10)
+    ymax_new = ymax + np.random.normal(0, 10)
+    if xmin_new > image_width or xmin_new < 0:
+        xmin_new = xmin
+    if xmax_new > image_width or xmax_new < 0:
+        xmax_new = xmax
+    if ymin_new > image_height or ymin_new < 0:
+        ymin_new = ymin
+    if ymax_new > image_height or ymax_new < 0:
+        ymax_new = ymax
+    return xmin_new, ymin_new, xmax_new, ymax_new
 
 
 def get_iou(bb1, bb2):
