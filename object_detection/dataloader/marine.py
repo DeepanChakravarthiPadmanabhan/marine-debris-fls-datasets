@@ -117,7 +117,7 @@ class Marine:
                     xmax = xmin + w
                     ymax = ymin + h
                     if split_name != 'test' and randomize_inputs:
-                        xmin, ymin, xmax, ymax = add_random_noise(
+                        xmin, ymin, xmax, ymax = get_random_box(
                             xmin, ymin, xmax, ymax, image_height, image_width)
                     xmin, xmax = xmin / width, xmax / width
                     ymin, ymax = ymin / height, ymax / height
@@ -151,7 +151,7 @@ def get_random_box(xmin, ymin, xmax, ymax, image_height, image_width):
     bb1 = {'x1': xmin, 'x2': xmax, 'y1': ymin, 'y2': ymax}
     x1, x2, y1, y2 = -1, -2, -1, -2
     iou = 0
-    while iou == 0 and x1 != x2 and y1 != y2:
+    while iou == 0:
         x1 = random.randint(0, image_width-5)
         x2 = random.randint(x1+1, image_width)
         y1 = random.randint(0, image_height-5)
