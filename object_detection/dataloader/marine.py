@@ -85,7 +85,7 @@ class Marine:
         else:
             raise ValueError('Give proper split name.')
 
-    def load_data(self, split_name, randomize_inputs=True):
+    def load_data(self, split_name, randomize_inputs=False):
         print('Randomizing data: ', randomize_inputs)
         images, annotations = self.get_split_data(split_name)
         data = []

@@ -40,6 +40,8 @@ parser.add_argument('-sp', '--save_path', default='trained_models/',
                     type=str, help='Path for writing model weights and logs')
 parser.add_argument('-dp', '--data_path', default='/media/deepan/externaldrive1/project_repos/marine_od/marine-debris-fls-datasets/md_fls_dataset/data/watertank-segmentation',
                     type=str, help='Path for writing model weights and logs')
+parser.add_argument('--bb_path', default='backbone_weights/',
+                    type=str, help='Path for backbone weights downloaded')
 parser.add_argument('-se', '--scheduled_epochs', nargs='+', type=int,
                     default=[110, 152], help='Epoch learning rate reduction')
 parser.add_argument('-mp', '--multiprocessing', default=False, type=bool,
@@ -69,7 +71,7 @@ class_names = Dataset.class_names
 num_classes = Dataset.num_classes
 input_image_shape = (480, 320)
 
-model = SSD_MobileNet(num_classes)
+model = SSD_MobileNet(num_classes, weight_folder=args.bb_path)
 model.summary()
 
 # Instantiating loss and metrics

@@ -10,9 +10,9 @@ from tensorflow.keras.models import load_model
 
 def SSD_ResNet20(num_classes=21, input_shape=(96, 96, 1),
                  num_priors=[4, 6, 6, 6, 4, 4], l2_loss=0.0005,
-                 return_base=False):
+                 return_base=False, weight_folder=None):
     image = Input(shape=input_shape, name='image')
-    resnet20 = load_model('backbone_weights/fls-turntable-objects-pretrained-resnet20-platform-96x96.hdf5')
+    resnet20 = load_model(weight_folder + 'fls-turntable-objects-pretrained-resnet20-platform-96x96.hdf5')
     resnet20.trainable = True
     resnet_out = resnet20(image)
 
