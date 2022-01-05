@@ -44,7 +44,7 @@ def SSD_ResNet20(num_classes=21, input_shape=(96, 96, 1),
                      kernel_regularizer=l2(l2_loss))(conv8_1)
 
     # Block 9 -----------------------------------------------------------------
-    conv9_1 = Conv2D(128, (1, 1), padding='same', activation='relu',
+    conv9_1 = Conv2D(128, (2, 2), padding='valid', activation='relu',
                      kernel_regularizer=l2(l2_loss))(conv8_2)
     conv9_2 = Conv2D(256, (3, 3), padding='valid', strides=(1, 1),
                      activation='relu', name='branch_6',

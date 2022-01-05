@@ -49,6 +49,9 @@ parser.add_argument('-mp', '--multiprocessing', default=False, type=bool,
 parser.add_argument('-w', '--workers', default=1, type=int,
                     help='Number of workers used for optimization')
 args = parser.parse_args()
+print('Batch size: ', args.batch_size)
+print('Dataset path: ', args.data_path)
+print('Backbone path: ', args.bb_path)
 
 optimizer = Adam(args.learning_rate, args.momentum)
 
