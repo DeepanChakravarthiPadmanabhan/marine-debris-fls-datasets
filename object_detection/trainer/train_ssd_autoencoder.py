@@ -9,7 +9,7 @@ tf.config.experimental.set_memory_growth(gpus[0], True)
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.callbacks import CSVLogger, ModelCheckpoint
 from paz.optimization.callbacks import LearningRateScheduler
-from object_detection.backbones.ssd_squeezenet import SSD_SqueezeNet
+from object_detection.backbones.ssd_autoencoder import SSD_Autoencoder
 from paz.optimization import MultiBoxLoss
 from paz.abstract import ProcessingSequence
 from paz.processors import TRAIN, VAL
@@ -24,7 +24,7 @@ description = 'Training script for single-shot object detection models'
 parser = argparse.ArgumentParser(description=description)
 parser.add_argument('-bs', '--batch_size', default=1, type=int,
                     help='Batch size for training')
-parser.add_argument('-et', '--evaluation_period', default=30, type=int,
+parser.add_argument('-et', '--evaluation_period', default=15, type=int,
                     help='evaluation frequency')
 parser.add_argument('-lr', '--learning_rate', default=0.001, type=float,
                     help='Initial learning rate for SGD')
@@ -74,7 +74,7 @@ class_names = Dataset.class_names
 num_classes = Dataset.num_classes
 input_image_shape = (480, 320)
 
-model = SSD_SqueezeNet(num_classes, weight_folder=args.bb_path)
+model = SSD_Autoencoder(num_classes, weight_folder=args.bb_path)
 model.summary()
 
 # Instantiating loss and metrics

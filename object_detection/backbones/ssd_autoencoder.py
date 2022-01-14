@@ -8,16 +8,16 @@ from object_detection.backbones.utils import create_prior_boxes
 from tensorflow.keras.models import load_model
 
 
-def SSD_SqueezeNet(num_classes=12, input_shape=(96, 96, 1),
-                  num_priors=[4, 6, 6, 6, 4, 4], l2_loss=0.0005,
-                  return_base=False, weight_folder=None):
+def SSD_Autoencoder(num_classes=12, input_shape=(96, 96, 1),
+                    num_priors=[4, 6, 6, 6, 4, 4], l2_loss=0.0005,
+                    return_base=False, weight_folder=None):
     image = Input(shape=input_shape, name='image')
-    squeezenet = load_model(weight_folder + 'fls-turntable-objects-pretrained-squeezenet-platform-96x96.hdf5')
-    squeezenet.trainable = True
-    squeezenet_out = squeezenet(image)
-
-    conv4_3_norm = squeezenet.get_layer('conv2d_105').output
-    fc7 = squeezenet.get_layer('concatenate_35').output
+    autoencoder = load_model(weight_folder + 'fls-turntable-objects-pretrained-convencoder-platform-code8-96x96.hdf5')
+    autoencoder.trainable = True
+    autoencoder_out = autoencoder(image)
+    autoencoder.summary()
+    conv4_3_norm = autoencoder.get_layer('enc_conv2').output
+    fc7 = autoencoder.get_layer('enc_conv3').output
 
     # EXTRA layers in SSD -----------------------------------------------------
     # Block 6 -----------------------------------------------------------------
@@ -58,7 +58,7 @@ def SSD_SqueezeNet(num_classes=12, input_shape=(96, 96, 1),
         outputs = create_multibox_head(
             branch_tensors, num_classes, num_priors, l2_loss)
 
-    model = Model(inputs=squeezenet.inputs, outputs=outputs,
-                  name='SSD-SqueezeNet')
-    model.prior_boxes = create_prior_boxes('SSD-SqueezeNet')
+    model = Model(inputs=autoencoder.inputs, outputs=outputs,
+                  name='SSD-Autoencoder')
+    model.prior_boxes = create_prior_boxes('SSD-Autoencoder')
     return model
