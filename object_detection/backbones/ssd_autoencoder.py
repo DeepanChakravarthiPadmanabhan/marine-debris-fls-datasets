@@ -16,6 +16,7 @@ def SSD_Autoencoder(num_classes=12, input_shape=(96, 96, 1),
     autoencoder.trainable = True
     autoencoder_out = autoencoder(image)
     autoencoder.summary()
+
     conv4_3_norm = autoencoder.get_layer('enc_conv2').output
     fc7 = autoencoder.get_layer('enc_conv3').output
 

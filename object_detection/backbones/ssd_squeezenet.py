@@ -15,6 +15,7 @@ def SSD_SqueezeNet(num_classes=12, input_shape=(96, 96, 1),
     squeezenet = load_model(weight_folder + 'fls-turntable-objects-pretrained-squeezenet-platform-96x96.hdf5')
     squeezenet.trainable = True
     squeezenet_out = squeezenet(image)
+    squeezenet.summary()
 
     conv4_3_norm = squeezenet.get_layer('conv2d_105').output
     fc7 = squeezenet.get_layer('concatenate_35').output

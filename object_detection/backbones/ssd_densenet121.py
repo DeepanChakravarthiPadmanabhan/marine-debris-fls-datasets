@@ -15,6 +15,7 @@ def SSD_DenseNet121(num_classes=12, input_shape=(96, 96, 1),
     densenet = load_model(weight_folder + 'fls-turntable-objects-pretrained-densenet121-platform-96x96.hdf5')
     densenet.trainable = True
     densenet_out = densenet(image)
+    densenet.summary()
 
     conv4_3_norm = densenet.get_layer('conv1/relu').output
     fc7 = densenet.get_layer('conv2_block6_concat').output

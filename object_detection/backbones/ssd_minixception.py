@@ -16,6 +16,7 @@ def SSD_MiniXception(num_classes=12, input_shape=(96, 96, 1),
     minixception.trainable = True
     minixception_out = minixception(image)
     minixception.summary()
+
     conv4_3_norm = minixception.get_layer('separable_conv2d_36').output
     fc7 = minixception.get_layer('separable_conv2d_38').output
 

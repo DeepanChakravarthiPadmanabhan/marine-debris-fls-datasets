@@ -15,6 +15,7 @@ def SSD_ResNet20(num_classes=21, input_shape=(96, 96, 1),
     resnet20 = load_model(weight_folder + 'fls-turntable-objects-pretrained-resnet20-platform-96x96.hdf5')
     resnet20.trainable = True
     resnet_out = resnet20(image)
+    resnet20.summary()
 
     conv4_3_norm = resnet20.get_layer('conv2d_98').output
     fc7 = resnet20.get_layer('conv2d_105').output
