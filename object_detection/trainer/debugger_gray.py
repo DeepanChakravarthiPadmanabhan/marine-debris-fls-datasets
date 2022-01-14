@@ -4,7 +4,7 @@ import tensorflow as tf
 
 
 import numpy as np
-from object_detection.backbones.ssd_resnet20 import SSD_ResNet20
+from object_detection.backbones.ssd_squeezenet import SSD_SqueezeNet
 from paz.abstract import Processor, SequentialProcessor
 from paz import processors as pr
 from object_detection.trainer.pipelines_gray import AugmentDetection
@@ -41,7 +41,7 @@ epochs = 1
 batch_size = 30
 
 ds_path = '/media/deepan/externaldrive1/project_repos/marine_od/marine-debris-fls-datasets/md_fls_dataset/data/watertank-segmentation'
-bb_path = 'backbone_weights/'
+bb_path = '/media/deepan/externaldrive1/project_repos/marine_od/marine-debris-fls-datasets/weights/'
 
 Dataset = Marine(ds_path, label_map, 'train')
 train_data = Dataset.load_data('train')
@@ -51,7 +51,7 @@ test_data = Dataset.load_data('test')
 data = train_data[:1]
 
 class_names = Dataset.class_names
-model = SSD_ResNet20(12, weight_folder=bb_path)
+model = SSD_SqueezeNet(12, weight_folder=bb_path)
 prior_boxes = model.prior_boxes
 
 testor_encoder = AugmentDetection(prior_boxes, num_classes=12)

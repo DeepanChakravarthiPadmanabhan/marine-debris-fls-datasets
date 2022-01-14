@@ -9,7 +9,7 @@ tf.config.experimental.set_memory_growth(gpus[0], True)
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.callbacks import CSVLogger, ModelCheckpoint
 from paz.optimization.callbacks import LearningRateScheduler
-from object_detection.backbones.ssd_densenet121 import SSD_DenseNet121
+from object_detection.backbones.ssd_squeezenet import SSD_SqueezeNet
 from paz.optimization import MultiBoxLoss
 from paz.abstract import ProcessingSequence
 from paz.processors import TRAIN, VAL
@@ -74,7 +74,7 @@ class_names = Dataset.class_names
 num_classes = Dataset.num_classes
 input_image_shape = (480, 320)
 
-model = SSD_DenseNet121(num_classes, weight_folder=args.bb_path)
+model = SSD_SqueezeNet(num_classes, weight_folder=args.bb_path)
 model.summary()
 
 # Instantiating loss and metrics

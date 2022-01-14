@@ -8,16 +8,16 @@ from object_detection.backbones.utils import create_prior_boxes
 from tensorflow.keras.models import load_model
 
 
-def SSD_DenseNet121(num_classes=12, input_shape=(96, 96, 1),
-                    num_priors=[4, 6, 6, 6, 4, 4], l2_loss=0.0005,
-                    return_base=False, weight_folder=None):
+def SSD_SqueezeNet(num_classes=12, input_shape=(96, 96, 1),
+                  num_priors=[4, 6, 6, 6, 4, 4], l2_loss=0.0005,
+                  return_base=False, weight_folder=None):
     image = Input(shape=input_shape, name='image')
-    densenet = load_model(weight_folder + 'fls-turntable-objects-pretrained-densenet121-platform-96x96.hdf5')
-    densenet.trainable = True
-    densenet_out = densenet(image)
+    squeezenet = load_model(weight_folder + 'fls-turntable-objects-pretrained-squeezenet-platform-96x96.hdf5')
+    squeezenet.trainable = True
+    squeezenet_out = squeezenet(image)
 
-    conv4_3_norm = densenet.get_layer('conv1/relu').output
-    fc7 = densenet.get_layer('conv2_block6_concat').output
+    conv4_3_norm = squeezenet.get_layer('concatenate_33').output
+    fc7 = squeezenet.get_layer('concatenate_35').output
 
     # EXTRA layers in SSD -----------------------------------------------------
     # Block 6 -----------------------------------------------------------------
@@ -58,7 +58,7 @@ def SSD_DenseNet121(num_classes=12, input_shape=(96, 96, 1),
         outputs = create_multibox_head(
             branch_tensors, num_classes, num_priors, l2_loss)
 
-    model = Model(inputs=densenet.inputs, outputs=outputs,
-                  name='SSD-DenseNet121')
-    model.prior_boxes = create_prior_boxes('SSD-DenseNet121')
+    model = Model(inputs=squeezenet.inputs, outputs=outputs,
+                  name='SSD-SqueezeNet')
+    model.prior_boxes = create_prior_boxes('SSD-SqueezeNet')
     return model
