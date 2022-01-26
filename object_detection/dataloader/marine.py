@@ -48,7 +48,7 @@ class Marine:
             absolute_file = os.path.join(images_path, files)
             if absolute_file:
                 image_files.append(absolute_file)
-            path = absolute_file.replace('/Images/', '/Annotations/')
+            path = absolute_file.replace('/Images/', '/BoxAnnotations/')
             filename = path.split('.png')[0] + '.xml'
             if os.path.exists(filename):
                 annotation_files.append(filename)
@@ -75,7 +75,7 @@ class Marine:
             return self.val_images, self.val_annotations
         elif split_name == 'test':
             images = np.loadtxt('test.txt', dtype='str')
-            replacer = lambda x: x.replace('/Images/', '/Annotations/')
+            replacer = lambda x: x.replace('/Images/', '/BoxAnnotations/')
             ext_changer = lambda x: x.replace('.png', '.xml')
             replacer = np.vectorize(replacer)
             ext_changer = np.vectorize(ext_changer)
