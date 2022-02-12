@@ -1,6 +1,10 @@
 # Forward-Looking Sonar Marine Debris Datasets
 Marine-Debris Datasets captured with a Forward-Looking Sonar in a water tank and turntable using an ARIS Explorer 3000 Sonar.
 
+# SSD trained weights
+
+The weights of SSD trained with different backbones such as VGG16, ResNet20, MobileNet, DenseNet121, SqueezeNet, and MiniXception are available [here](https://github.com/DeepanChakravarthiPadmanabhan/model-weights/releases/tag/v2.0.0)
+
 # Watertank Dataset
 
 The full dataset release containing marine debris in the OSL water tank can be found [here](https://github.com/mvaldenegro/marine-debris-fls-datasets/releases/tag/watertank-v1.0).
