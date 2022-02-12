@@ -3,7 +3,7 @@ Marine-Debris Datasets captured with a Forward-Looking Sonar in a water tank and
 
 # SSD trained weights
 
-The weights of SSD trained with different backbones such as VGG16, ResNet20, MobileNet, DenseNet121, SqueezeNet, and MiniXception are available [here](https://github.com/DeepanChakravarthiPadmanabhan/model-weights/releases/tag/v2.0.0)
+The weights of SSD trained with different backbones such as VGG16, ResNet20, MobileNet, DenseNet121, SqueezeNet, and MiniXception are available [here](https://github.com/DeepanChakravarthiPadmanabhan/model-weights/releases/tag/v2.0.0).
 
 # Watertank Dataset
 
