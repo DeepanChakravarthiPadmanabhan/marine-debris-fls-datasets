@@ -19,7 +19,7 @@ input_base_file = 'marine-debris-aris3k-1609.png'
 input_file += input_base_file
 
 image = load_image_gray(input_file)
-print(image.shape)
+print("Loaded input image shape: ", image.shape)
 
 ssd_resnet_weights = '/media/deepan/externaldrive1/project_repos/marine_od/marine-debris-fls-datasets/weights/marine_debris_ssd_resnet20.hdf5'
 ssd_mobilenet_weights = '/media/deepan/externaldrive1/project_repos/marine_od/marine-debris-fls-datasets/weights/marine_debris_ssd_mobilenet.hdf5'
@@ -66,5 +66,6 @@ out = pipeline(image)
 print(out['boxes2D'], out['image'].shape)
 draw_process = pr.DrawBoxes2D(class_names)
 image_drawn = draw_process(out['image'], out['boxes2D'])
-filename = model_bb + '_' + input_base_file.split('.')[0].split('-')[-1] + '.jpg'
+filename = (model_bb + '_' +
+            input_base_file.split('.')[0].split('-')[-1] + '.jpg')
 plt.imsave(filename, image_drawn)
